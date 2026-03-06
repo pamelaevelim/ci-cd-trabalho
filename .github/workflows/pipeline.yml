@@ -1,0 +1,31 @@
+name: Pipeline CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  validar_codigo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v3
+
+      - name: Validando código
+        run: echo "Código validado com sucesso!"
+
+  build_projeto:
+    runs-on: ubuntu-latest
+    needs: validar_codigo
+
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v3
+
+      - name: Simulando build
+        run: echo "Build executado com sucesso!"
+
+      - name: Mostrar mensagem secreta
+        run: echo "Mensagem secreta: ${{ secrets.MENSAGEM_SECRETA }}"
